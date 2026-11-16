@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Kano State Polytechnic Academic Transcript System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo-placeholder.svg">
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+  <div class="min-h-screen flex">
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/60 z-40 hidden md:hidden"></div>
+
+    <!-- Collapsible / Responsive Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col transition-transform duration-300 -translate-x-full md:translate-x-0 border-r border-slate-800">
+      <!-- Sidebar Brand Header -->
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+        <a href="dashboard.html" class="flex items-center space-x-3">
+          <img src="../assets/images/logo-placeholder.svg" alt="Crest" class="w-10 h-10 drop-shadow">
+          <div>
+            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">Kano State Poly</span>
+            <span class="text-xs font-semibold text-white">Computer Science Dept</span>
+          </div>
+        </a>
+        <button id="sidebar-close-btn" class="md:hidden text-slate-400 hover:text-white">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto text-xs font-medium">
+        <a href="dashboard.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Dashboard
+        </a>
+        <a href="students.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          Student Management
+        </a>
+        <a href="courses.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Course Management
+        </a>
+        <a href="academic-sessions.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Academic Sessions
+        </a>
+        <a href="semesters.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          Semester Management
+        </a>
+        <a href="results.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          Result Management
+        </a>
+        <a href="gpa-cgpa.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          GPA &amp; CGPA
+        </a>
+        <a href="transcripts.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Transcript Management
+        </a>
+        <a href="qr-verification.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+          QR Verification
+        </a>
+        <a href="settings.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Settings
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer User / Logout -->
+      <div class="p-4 border-t border-slate-800">
+        <button type="button" onclick="AppLayout.logout()" class="w-full flex items-center justify-center px-3 py-2 rounded-xl text-xs font-semibold bg-red-950/40 text-red-400 hover:bg-red-900/50 hover:text-red-200 border border-red-900/50 transition">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          End Staff Session
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area with Topbar -->
+    <div class="flex-1 md:pl-64 flex flex-col min-w-0">
+      
+      <!-- Top Navigation Bar -->
+      <header id="topbar" class="bg-white border-b border-slate-200 sticky top-0 z-30 px-4 sm:px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <button id="sidebar-toggle-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="hidden sm:block">
+            <h2 class="text-base font-bold text-slate-800">Departmental Overview</h2>
+            <p class="text-xs text-slate-400">Computer Science Academic Records &amp; Transcript Generator</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <!-- Active Session Pill -->
+          <div id="active-session-indicator" class="hidden sm:block"></div>
+
+          <!-- Public Verification Link shortcut -->
+          <a href="../verify.html" target="_blank" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Public Verify
+          </a>
+
+          <!-- User Menu Dropdown -->
+          <div class="relative">
+            <button id="user-menu-btn" type="button" class="flex items-center space-x-2 p-1.5 rounded-xl hover:bg-slate-100 transition focus:outline-none">
+              <div class="w-8 h-8 rounded-full bg-blue-900 text-amber-400 font-bold flex items-center justify-center text-xs border border-amber-400">
+                AA
+              </div>
+              <div class="hidden md:block text-left text-xs pr-1">
+                <span class="user-display-name font-bold text-slate-800 block">Dr. Aminu Abdullahi</span>
+                <span class="user-display-title text-[10px] text-slate-400 block">HOD Computer Science</span>
+              </div>
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div id="user-dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-1.5 z-50 text-xs animate-fade-in">
+              <div class="px-4 py-2 border-b border-slate-100">
+                <span class="font-bold text-slate-800 block user-display-name">Dr. Aminu Abdullahi</span>
+                <span class="text-slate-400 text-[10px] block">admin@kanopoly.edu.ng</span>
+              </div>
+              <a href="settings.html" class="flex items-center px-4 py-2 text-slate-700 hover:bg-slate-50">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                Institutional Settings
+              </a>
+              <button type="button" onclick="AppLayout.logout()" class="w-full text-left flex items-center px-4 py-2 text-red-600 hover:bg-red-50">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Dashboard Page Body -->
+      <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6">
+        
+        <!-- Welcome Banner -->
+        <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-2xl p-6 text-white shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-semibold text-amber-400 uppercase tracking-widest block mb-1">Kano State Polytechnic &bull; Department of Computer Science</span>
+            <h1 class="text-2xl font-black text-white">Welcome, <span class="user-display-name">Dr. Aminu Abdullahi</span></h1>
+            <p class="text-xs text-slate-300 mt-1">Academic Transcript Portal &bull; Verification Database is Active &bull; NBTE Grading Scale</p>
+          </div>
+          <!-- Quick Action Buttons -->
+          <div class="flex flex-wrap items-center gap-2">
+            <a href="students.html" class="px-3.5 py-2 bg-blue-800 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm transition flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+              Register Student
+            </a>
+            <a href="results.html" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              Enter Results
+            </a>
+            <a href="transcripts.html" class="px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              Issue Transcript
+            </a>
+          </div>
+        </div>
+
+        <!-- 5 Summary Statistics Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <!-- Card 1: Total Students -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-900 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-slate-500">Total Students</span>
+              <div id="metric-total-students" class="text-2xl font-black text-slate-900">0</div>
+              <span class="text-[10px] text-emerald-600 font-semibold">&uarr; Active ND &amp; HND</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Total Courses -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-900 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-slate-500">Total Courses</span>
+              <div id="metric-total-courses" class="text-2xl font-black text-slate-900">0</div>
+              <span class="text-[10px] text-slate-400 font-semibold">CS Curriculum</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Academic Sessions -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-900 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-slate-500">Academic Sessions</span>
+              <div id="metric-total-sessions" class="text-2xl font-black text-slate-900">0</div>
+              <span class="text-[10px] text-emerald-600 font-semibold">2024/2025 Current</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Results Entered -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-900 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-slate-500">Results Entered</span>
+              <div id="metric-total-results" class="text-2xl font-black text-slate-900">0</div>
+              <span class="text-[10px] text-slate-400 font-semibold">Grade &amp; QP Computed</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Transcripts Generated -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-900 flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <div>
+              <span class="text-xs font-semibold text-slate-500">Transcripts Issued</span>
+              <div id="metric-total-transcripts" class="text-2xl font-black text-slate-900">0</div>
+              <span class="text-[10px] text-emerald-600 font-semibold">&check; QR Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Grid: Chart & Activity Feed -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Chart Column (2 cols) -->
+          <div class="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Examination Results &amp; Grade Distribution</h3>
+                <p class="text-xs text-slate-500">Computed quality point distribution across recorded examination scores</p>
+              </div>
+              <span class="text-[11px] font-semibold text-blue-900 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                NBTE 4.0 Scale
+              </span>
+            </div>
+            <div class="relative w-full overflow-hidden">
+              <canvas id="grade-distribution-canvas" height="200" class="w-full"></canvas>
+            </div>
+          </div>
+
+          <!-- Academic Activity Column (1 col) -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-bold text-slate-900">Recent Academic Activity</h3>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              </div>
+              <ul id="recent-activities-list" class="space-y-3">
+                <!-- Injected via dashboard.js -->
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-slate-100 text-center">
+              <a href="qr-verification.html" class="text-xs font-bold text-blue-900 hover:underline">
+                View All Verification Audit Logs &rarr;
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Lower Grid: Recent Student Registrations & Recent Transcripts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          <!-- Recent Students Table Card -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Recent Student Registrations</h3>
+                <p class="text-xs text-slate-400">Newly matriculated Computer Science candidates</p>
+              </div>
+              <a href="students.html" class="text-xs font-semibold text-blue-900 hover:underline">View All &rarr;</a>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="bg-slate-50 text-[10px] uppercase font-bold text-slate-500 border-b border-slate-100">
+                    <th class="py-3 px-4">Matric No.</th>
+                    <th class="py-3 px-4">Student Name</th>
+                    <th class="py-3 px-4">Level</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-students-tbody" class="divide-y divide-slate-100">
+                  <!-- Injected via dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recently Generated Transcripts Table Card -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Recently Generated Transcripts</h3>
+                <p class="text-xs text-slate-400">Official transcripts issued with active QR codes</p>
+              </div>
+              <a href="transcripts.html" class="text-xs font-semibold text-blue-900 hover:underline">View All &rarr;</a>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="bg-slate-50 text-[10px] uppercase font-bold text-slate-500 border-b border-slate-100">
+                    <th class="py-3 px-4">Reference No.</th>
+                    <th class="py-3 px-4">Student Name</th>
+                    <th class="py-3 px-4">CGPA</th>
+                    <th class="py-3 px-4">Class</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4 text-right">Preview</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-transcripts-tbody" class="divide-y divide-slate-100">
+                  <!-- Injected via dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+      <!-- Dashboard Footer -->
+      <footer class="bg-white border-t border-slate-200 py-4 px-6 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div>
+          Kano State Polytechnic &bull; Department of Computer Science &bull; Academic Transcript System
+        </div>
+        <div class="flex items-center space-x-3 text-slate-400">
+          <span>Version 2.4.0 (REST-Ready)</span>
+          <span>&bull;</span>
+          <a href="../verify.html" class="hover:text-slate-600">Verification Portal</a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/calculations.js"></script>
+  <script src="../assets/js/verification.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

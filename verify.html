@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Academic Transcript & QR Verification Portal - Kano State Polytechnic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo-placeholder.svg">
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
+
+  <!-- Header Banner -->
+  <header class="bg-slate-900 text-white border-b-4 border-amber-500 py-4 px-4 sm:px-8 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <img src="assets/images/logo-placeholder.svg" alt="Crest" class="w-12 h-12 drop-shadow">
+        <div>
+          <span class="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">Kano State Polytechnic &bull; School of Technology</span>
+          <h1 class="text-lg sm:text-xl font-black text-white">Public Academic Transcript Verification Portal</h1>
+        </div>
+      </div>
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="text-xs text-slate-300 hover:text-white transition">Home</a>
+        <span class="text-slate-600">&bull;</span>
+        <a href="login.html" class="px-3 py-1.5 bg-blue-900 hover:bg-blue-800 text-white rounded-lg text-xs font-semibold shadow-sm transition">
+          Staff Portal Login &rarr;
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+    <!-- Hero / Information Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 mb-8 text-center">
+      <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <h2 class="text-2xl font-extrabold text-slate-900">Verify Transcript Authenticity</h2>
+      <p class="text-sm text-slate-600 mt-2 max-w-xl mx-auto">
+        Verify official academic transcripts issued by the Computer Science Department of Kano State Polytechnic. Scan the QR code on the document or enter the unique transcript reference number below.
+      </p>
+
+      <!-- Verification Input Form -->
+      <form id="public-verify-form" class="mt-6 max-w-xl mx-auto">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <div class="relative flex-1">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </span>
+            <input id="verify-reference-input" type="text" placeholder="e.g. KSP/CST/TR/2024/00842" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono font-semibold focus:ring-2 focus:ring-blue-900 focus:bg-white uppercase tracking-wider transition" required>
+          </div>
+          <button type="submit" id="verify-submit-btn" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm shadow-md transition flex items-center justify-center gap-2 shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            Verify Document
+          </button>
+        </div>
+      </form>
+
+      <!-- Quick Sample Buttons for easy testing -->
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
+        <span class="text-slate-400 font-medium">Quick Test References:</span>
+        <button type="button" onclick="testRef('KSP/CST/TR/2024/00842')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-mono font-semibold transition">
+          KSP/CST/TR/2024/00842 (Valid)
+        </button>
+        <button type="button" onclick="testRef('KSP/CST/TR/2024/00915')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-mono font-semibold transition">
+          KSP/CST/TR/2024/00915 (Valid)
+        </button>
+        <button type="button" onclick="testRef('KSP/CST/TR/2024/00000')" class="px-2.5 py-1 bg-red-50 hover:bg-red-100 text-red-700 rounded-lg font-mono font-semibold transition">
+          KSP/CST/TR/2024/00000 (Invalid)
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Display Container -->
+    <div id="verification-result-container" class="hidden">
+      <!-- Injected dynamically by JavaScript below -->
+    </div>
+
+    <!-- Security & Fraud Advisory Note -->
+    <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-5 text-xs text-blue-900 flex items-start space-x-3 mt-8">
+      <svg class="w-5 h-5 text-blue-800 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <div>
+        <span class="font-bold block mb-1">Official Document Security Notice:</span>
+        Kano State Polytechnic transcripts are issued with digital QR signatures. If the information on the physical printed transcript does not match the verification record displayed on this official portal, the physical document has been tampered with and is null and void. For verification discrepancies, report directly to <span class="font-semibold underline">registry@kanopoly.edu.ng</span>.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+    &copy; Kano State Polytechnic &bull; Department of Computer Science &bull; Academic Transcript QR Verification Portal
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/verification.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const verifyForm = document.getElementById('public-verify-form');
+      const input = document.getElementById('verify-reference-input');
+
+      // Auto check query param ?ref=...
+      const urlParams = new URLSearchParams(window.location.search);
+      const refParam = urlParams.get('ref');
+      if (refParam) {
+        input.value = refParam;
+        performVerification(refParam);
+      }
+
+      verifyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        performVerification(input.value.trim());
+      });
+    });
+
+    function testRef(ref) {
+      document.getElementById('verify-reference-input').value = ref;
+      performVerification(ref);
+    }
+
+    async function performVerification(referenceNumber) {
+      const resultContainer = document.getElementById('verification-result-container');
+      const submitBtn = document.getElementById('verify-submit-btn');
+
+      if (!referenceNumber) return;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Verifying...
+      `;
+
+      resultContainer.classList.remove('hidden');
+      resultContainer.innerHTML = `<div class="p-8 text-center text-slate-400">Verifying transcript cryptographic reference against Kano State Polytechnic database...</div>`;
+
+      try {
+        const res = await api.verification.verify(referenceNumber);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          Verify Document
+        `;
+
+        if (res.verified) {
+          const t = res.transcript;
+          resultContainer.innerHTML = `
+            <div class="bg-white rounded-2xl shadow-lg border-2 border-emerald-500 overflow-hidden animate-fade-in">
+              <!-- Verification Success Header -->
+              <div class="bg-emerald-600 text-white px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-full bg-white text-emerald-600 flex items-center justify-center font-bold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <div>
+                    <span class="text-xs font-bold text-emerald-200 uppercase tracking-widest block">AUTHENTIC RECORD CONFIRMED</span>
+                    <h3 class="text-lg font-black text-white">VERIFIED OFFICIAL TRANSCRIPT</h3>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="px-3 py-1 bg-emerald-700 rounded-full text-xs font-bold font-mono text-emerald-100 border border-emerald-500">
+                    STATUS: GENUINE &amp; VALID
+                  </span>
+                </div>
+              </div>
+
+              <!-- Details Grid -->
+              <div class="p-6 sm:p-8">
+                <div class="flex flex-col md:flex-row items-start justify-between gap-6 border-b border-slate-100 pb-6 mb-6">
+                  <div class="space-y-1">
+                    <span class="text-xs text-slate-400 uppercase font-bold tracking-wider">Student Full Name</span>
+                    <h4 class="text-xl font-bold text-slate-900">${t.studentName}</h4>
+                    <span class="inline-block font-mono text-sm font-bold text-blue-900 bg-blue-50 px-2.5 py-0.5 rounded border border-blue-200">
+                      ${t.matricNumber}
+                    </span>
+                  </div>
+                  <div class="text-right shrink-0">
+                    <img src="assets/images/seal.svg" alt="Official Seal" class="w-24 h-24 mx-auto drop-shadow-sm">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  <div class="p-3 bg-slate-50 rounded-xl">
+                    <span class="text-xs text-slate-400 block font-semibold">Awarding Institution</span>
+                    <span class="font-bold text-slate-900">${t.institution || 'Kano State Polytechnic'}</span>
+                  </div>
+                  <div class="p-3 bg-slate-50 rounded-xl">
+                    <span class="text-xs text-slate-400 block font-semibold">Department</span>
+                    <span class="font-bold text-slate-900">${t.department}</span>
+                  </div>
+                  <div class="p-3 bg-slate-50 rounded-xl">
+                    <span class="text-xs text-slate-400 block font-semibold">Academic Programme</span>
+                    <span class="font-bold text-slate-900">${t.programme}</span>
+                  </div>
+                  <div class="p-3 bg-slate-50 rounded-xl">
+                    <span class="text-xs text-slate-400 block font-semibold">Transcript Reference Number</span>
+                    <span class="font-mono font-bold text-slate-900">${t.referenceNumber}</span>
+                  </div>
+                  <div class="p-3 bg-slate-50 rounded-xl">
+                    <span class="text-xs text-slate-400 block font-semibold">Official Date Issued</span>
+                    <span class="font-semibold text-slate-900">${t.issueDate}</span>
+                  </div>
+                  <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                    <span class="text-xs text-emerald-800 block font-semibold">Degree Classification</span>
+                    <span class="font-bold text-emerald-900">${t.classification}</span>
+                  </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+                  <span>Authorized by: <strong class="text-slate-700">${t.generatedBy}</strong></span>
+                  <span class="text-emerald-700 font-semibold flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    Verified with Kano State Polytechnic Academic Records
+                  </span>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // Invalid or Revoked
+          const isRevoked = res.status === "REVOKED";
+          resultContainer.innerHTML = `
+            <div class="bg-white rounded-2xl shadow-lg border-2 border-red-500 overflow-hidden animate-fade-in">
+              <div class="bg-red-600 text-white px-6 py-4 flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-white text-red-600 flex items-center justify-center font-bold">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </div>
+                <div>
+                  <span class="text-xs font-bold text-red-200 uppercase tracking-widest block">${isRevoked ? 'TRANSCRIPT REVOKED' : 'RECORD NOT FOUND'}</span>
+                  <h3 class="text-lg font-black text-white">${isRevoked ? 'INVALID / REVOKED TRANSCRIPT' : 'UNVERIFIED RECORD'}</h3>
+                </div>
+              </div>
+              <div class="p-6 sm:p-8">
+                <p class="text-sm text-slate-700 leading-relaxed">${res.message}</p>
+                ${isRevoked && res.transcript ? `
+                  <div class="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-xs text-red-900 space-y-1">
+                    <div><strong>Reference:</strong> <span class="font-mono">${res.transcript.referenceNumber}</span></div>
+                    <div><strong>Student Name:</strong> ${res.transcript.studentName}</div>
+                    <div><strong>Reason for Revocation:</strong> ${res.revocationReason}</div>
+                  </div>
+                ` : ''}
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                  <span>If you suspect fraud, report immediately to Kano State Polytechnic Registrar.</span>
+                  <a href="mailto:registry@kanopoly.edu.ng" class="font-bold text-red-600 hover:underline">Report Document</a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `Verify Document`;
+        resultContainer.innerHTML = `<div class="p-6 text-center text-red-600 font-semibold">${err.message}</div>`;
+      }
+    }
+  </script>
+</body>
+</html>

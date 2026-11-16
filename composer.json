@@ -1,0 +1,36 @@
+{
+    "name": "kanopoly/academic-transcript-system",
+    "description": "Web-Based Academic Transcript Generating System with QR Verification - Kano State Polytechnic",
+    "type": "project",
+    "license": "Proprietary",
+    "authors": [
+        {
+            "name": "Department of Computer Science, Kano State Polytechnic"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-json": "*",
+        "ext-gd": "*",
+        "ext-openssl": "*",
+        "ext-mbstring": "*"
+    },
+    "suggest": {
+        "dompdf/dompdf": "Optional for advanced HTML-to-PDF rendering (native PDF 1.4 engine is included by default)",
+        "endroid/qr-code": "Optional alternative QR code library (native vector SVG QR engine is included by default)"
+    },
+    "autoload": {
+        "psr-4": {
+            "Helpers\\": "helpers/",
+            "Models\\": "models/",
+            "Services\\": "services/",
+            "Controllers\\": "controllers/",
+            "Middleware\\": "middleware/"
+        }
+    },
+    "scripts": {
+        "test": "php tests/BackendTest.php && php tests/HttpEndpointTest.php"
+    }
+}

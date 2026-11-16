@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- Outer Ring -->
+  <circle cx="150" cy="150" r="140" fill="url(#navyGrad)" stroke="url(#goldGrad)" stroke-width="6" filter="url(#shadow)" />
+  <circle cx="150" cy="150" r="126" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3" />
+  
+  <!-- Inner Background -->
+  <circle cx="150" cy="150" r="105" fill="#ffffff" />
+  <circle cx="150" cy="150" r="105" fill="none" stroke="url(#goldGrad)" stroke-width="3" />
+
+  <!-- Circular Text -->
+  <path id="textPathTop" d="M 30,150 A 120,120 0 0,1 270,150" fill="none" />
+  <text font-family="'Segoe UI', Roboto, sans-serif" font-size="14.5" font-weight="800" fill="#f8fafc" letter-spacing="2.5">
+    <textPath href="#textPathTop" startOffset="50%" text-anchor="middle">
+      KANO STATE POLYTECHNIC
+    </textPath>
+  </text>
+
+  <path id="textPathBottom" d="M 270,150 A 120,120 0 0,1 30,150" fill="none" />
+  <text font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#fbbf24" letter-spacing="2">
+    <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">
+      COMPUTER SCIENCE DEPT
+    </textPath>
+  </text>
+
+  <!-- Stars -->
+  <polygon points="38,150 43,153 41,148 45,144 40,144 38,139 36,144 31,144 35,148 33,153" fill="#f59e0b" />
+  <polygon points="262,150 267,153 265,148 269,144 264,144 262,139 260,144 255,144 259,148 257,153" fill="#f59e0b" />
+
+  <!-- Center Shield / Icon -->
+  <g transform="translate(150, 150)">
+    <!-- Shield Outline -->
+    <path d="M -50,-50 L 50,-50 C 50,0 45,45 0,65 C -45,45 -50,0 -50,-50 Z" fill="#f8fafc" stroke="#1e3a8a" stroke-width="3" />
+    
+    <!-- Shield Interior Top -->
+    <path d="M -48,-48 L 48,-48 L 48,-15 L -48,-15 Z" fill="#1e3a8a" />
+    <!-- Gear in Shield Top -->
+    <circle cx="0" cy="-30" r="12" fill="none" stroke="#f59e0b" stroke-width="4" stroke-dasharray="6,3" />
+    <circle cx="0" cy="-30" r="6" fill="#f59e0b" />
+
+    <!-- Open Book in Center -->
+    <path d="M 0,10 C 15,2 35,5 38,15 L 38,40 C 35,32 15,30 0,35 C -15,30 -35,32 -38,40 L -38,15 C -35,5 -15,2 0,10 Z" fill="#ffffff" stroke="#1e3a8a" stroke-width="2.5" />
+    <line x1="0" y1="10" x2="0" y2="35" stroke="#1e3a8a" stroke-width="2" />
+    <!-- Book lines -->
+    <line x1="-30" y1="22" x2="-8" y2="20" stroke="#64748b" stroke-width="1.5" />
+    <line x1="-30" y1="28" x2="-8" y2="26" stroke="#64748b" stroke-width="1.5" />
+    <line x1="8" y1="20" x2="30" y2="22" stroke="#64748b" stroke-width="1.5" />
+    <line x1="8" y1="26" x2="30" y2="28" stroke="#64748b" stroke-width="1.5" />
+
+    <!-- Knowledge Torch / Flame on top of book -->
+    <path d="M 0,-5 C 5,-12 8,-20 0,-24 C -8,-20 -5,-12 0,-5 Z" fill="#ea580c" />
+    <path d="M 0,-7 C 3,-11 4,-16 0,-19 C -4,-16 -3,-11 0,-7 Z" fill="#facc15" />
+  </g>
+
+  <!-- Motto Banner -->
+  <path d="M 80,240 L 220,240 L 210,256 L 90,256 Z" fill="#1e3a8a" stroke="#d97706" stroke-width="1.5" />
+  <text x="150" y="252" font-family="'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" fill="#fef08a" text-anchor="middle" letter-spacing="1.5">
+    SKILL FOR SELF RELIANCE
+  </text>
+</svg>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Portal Login - Kano State Polytechnic Academic Transcript System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo-placeholder.svg">
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex flex-col justify-between">
+
+  <!-- Header Banner -->
+  <header class="bg-slate-900 text-white border-b-2 border-amber-500 py-3 px-6 shadow-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-3">
+        <img src="assets/images/logo-placeholder.svg" alt="Crest" class="w-10 h-10">
+        <div>
+          <span class="text-xs text-amber-400 font-bold uppercase tracking-wider block">Kano State Polytechnic</span>
+          <span class="text-sm font-semibold text-white">Department of Computer Science</span>
+        </div>
+      </a>
+      <a href="verify.html" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1.5 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Public QR Verification Portal
+      </a>
+    </div>
+  </header>
+
+  <!-- Login Main Container -->
+  <main class="flex-1 flex items-center justify-center p-4 sm:p-6">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl border border-slate-200/80 p-8">
+      
+      <!-- Logo & Title -->
+      <div class="text-center mb-6">
+        <img src="assets/images/logo-placeholder.svg" alt="Kano Poly Logo" class="w-20 h-20 mx-auto drop-shadow-md mb-3">
+        <span class="text-[11px] font-bold text-amber-600 uppercase tracking-widest bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+          Authorized Staff Only
+        </span>
+        <h2 class="text-xl font-black text-slate-900 mt-2">Academic Administration Portal</h2>
+        <p class="text-xs text-slate-500 mt-1">Sign in with your institutional departmental credentials</p>
+      </div>
+
+      <!-- Error Alert Container -->
+      <div id="login-error-alert" class="hidden mb-4 p-3 bg-red-50 border-l-4 border-red-600 rounded-r-lg text-xs text-red-700 flex items-start space-x-2">
+        <svg class="w-4 h-4 text-red-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span id="login-error-message">Invalid credentials</span>
+      </div>
+
+      <!-- One-Click Demo Credentials Pill -->
+      <div class="mb-5 p-3 bg-blue-50/70 border border-blue-200 rounded-xl flex items-center justify-between text-xs">
+        <div>
+          <span class="font-bold text-blue-900 block">Demonstration Account</span>
+          <span class="text-slate-600 font-mono text-[11px]">admin@kanopoly.edu.ng</span>
+        </div>
+        <button id="demo-credentials-btn" type="button" class="px-2.5 py-1.5 bg-blue-900 text-white font-semibold rounded-lg text-xs hover:bg-blue-800 transition">
+          Auto-Fill
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="username-or-email" class="block text-xs font-bold text-slate-700 mb-1">Username or Staff Email</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/></svg>
+            </span>
+            <input id="username-or-email" type="text" autocomplete="username" placeholder="e.g. admin@kanopoly.edu.ng" class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-900 focus:bg-white transition" required>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label for="password-input" class="block text-xs font-bold text-slate-700">Password</label>
+            <button type="button" onclick="handleForgotPassword()" class="text-xs text-blue-900 hover:text-blue-700 font-semibold hover:underline">
+              Forgot password?
+            </button>
+          </div>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </span>
+            <input id="password-input" type="password" autocomplete="current-password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="w-full pl-9 pr-10 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-900 focus:bg-white transition" required>
+            <button id="toggle-password-btn" type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input id="remember-me" type="checkbox" class="w-4 h-4 rounded text-blue-900 border-slate-300 focus:ring-blue-900">
+            <span class="text-xs text-slate-600 font-medium">Remember me for 30 days</span>
+          </label>
+        </div>
+
+        <button id="login-submit-btn" type="submit" class="w-full py-3 bg-blue-900 hover:bg-blue-800 text-white font-bold rounded-xl text-sm shadow-md transition transform active:scale-[0.99] flex items-center justify-center">
+          Sign In to Portal
+        </button>
+      </form>
+
+      <!-- Public Verification link footer -->
+      <div class="mt-6 pt-5 border-t border-slate-100 text-center">
+        <p class="text-xs text-slate-500">
+          Looking to verify an academic transcript? <br>
+          <a href="verify.html" class="font-bold text-emerald-700 hover:text-emerald-800 underline mt-1 inline-block">
+            Open Public QR Verification Portal &rarr;
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+    &copy; Kano State Polytechnic &bull; Department of Computer Science &bull; Academic Transcript System
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

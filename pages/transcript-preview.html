@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Academic Transcript - Kano State Polytechnic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo-placeholder.svg">
+</head>
+<body class="bg-slate-200 py-6 px-2 sm:px-4 text-slate-900 font-sans antialiased">
+
+  <!-- Floating Action Control Bar (Hidden when printing) -->
+  <aside aria-label="Action Controls" class="no-print max-w-4xl mx-auto mb-6 bg-slate-900 text-white rounded-2xl p-4 shadow-xl flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <a href="transcripts.html" class="p-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-slate-300 hover:text-white transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+      </a>
+      <div>
+        <h1 class="text-sm font-bold text-white">Official Academic Transcript Preview</h1>
+        <p class="text-xs text-slate-400">A4 Printable Format with Embedded Verification QR Code</p>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <button type="button" onclick="triggerTranscriptPrint()" class="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        Print Transcript
+      </button>
+
+      <button type="button" onclick="downloadTranscriptPDF()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Download PDF
+      </button>
+
+      <a id="doc-qr-verification-url" href="#" target="_blank" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 font-semibold rounded-xl text-xs border border-slate-700 transition flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Test Verification
+      </a>
+    </div>
+  </aside>
+
+  <!-- OFFICIAL A4 ACADEMIC TRANSCRIPT PAPER -->
+  <main class="transcript-paper border border-slate-300 rounded-none sm:rounded-lg">
+    
+    <!-- Watermark -->
+    <div id="doc-watermark" class="transcript-watermark">
+      KANO STATE POLYTECHNIC<br>OFFICIAL TRANSCRIPT
+    </div>
+
+    <!-- Official Document Header -->
+    <div class="relative z-10 border-b-2 border-slate-900 pb-4 mb-4">
+      <div class="flex items-center justify-between gap-4">
+        <!-- Logo -->
+        <div class="w-24 shrink-0 text-center">
+          <img src="../assets/images/logo-placeholder.svg" alt="Kano Poly Crest" class="w-20 h-20 mx-auto">
+        </div>
+
+        <!-- Institutional Titles -->
+        <div class="flex-1 text-center">
+          <h1 id="doc-institution-name" class="font-academic text-2xl font-black uppercase text-slate-900 tracking-tight leading-none">
+            KANO STATE POLYTECHNIC
+          </h1>
+          <h2 id="doc-institution-sub" class="text-sm font-bold uppercase tracking-wider text-slate-800 mt-1">
+            School of Technology
+          </h2>
+          <h3 id="doc-department-name" class="text-xs font-extrabold uppercase text-blue-900 tracking-wide mt-0.5">
+            Department of Computer Science
+          </h3>
+          <p class="text-[10px] text-slate-600 mt-0.5">
+            PMB 3401, Matan Fada Road, Kano State, Nigeria &bull; <span id="doc-motto" class="italic font-serif">"Skill for Self Reliance"</span>
+          </p>
+        </div>
+
+        <!-- QR Code Placeholder on Header -->
+        <div class="w-24 shrink-0 text-center flex flex-col items-center">
+          <div id="doc-qr-code-container" class="border border-slate-300 p-1 bg-white shadow-sm"></div>
+          <span class="text-[8px] font-mono font-bold text-slate-500 uppercase mt-1">Scan to Verify</span>
+        </div>
+      </div>
+
+      <!-- Formal Document Title Banner -->
+      <div class="mt-4 pt-2 border-t border-slate-300 flex items-center justify-between text-xs">
+        <div class="font-mono text-[11px] text-slate-700">
+          Ref No: <strong id="doc-reference-no" class="font-bold text-slate-900">KSP/CST/TR/...</strong>
+        </div>
+        <div class="text-center">
+          <span class="px-6 py-1 bg-slate-900 text-white font-academic font-bold text-sm tracking-widest uppercase rounded">
+            OFFICIAL ACADEMIC TRANSCRIPT
+          </span>
+        </div>
+        <div class="text-right text-[11px] text-slate-700">
+          Date Issued: <strong id="doc-issue-date" class="font-bold text-slate-900">YYYY-MM-DD</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Bio Particulars Table -->
+    <div class="relative z-10 mb-4 bg-slate-50 border border-slate-300 p-3 text-[11px]">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-y-2 gap-x-4">
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Student Full Name:</span>
+          <strong id="doc-student-name" class="font-bold text-slate-900 text-xs">--</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Matriculation Number:</span>
+          <strong id="doc-matric-no" class="font-mono font-bold text-slate-900 text-xs">--</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Programme of Study:</span>
+          <strong id="doc-programme" class="font-bold text-slate-900">--</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Department:</span>
+          <strong id="doc-department" class="font-bold text-slate-900">Computer Science</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Year of Admission:</span>
+          <strong id="doc-admission-year" class="font-bold text-slate-900">--</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Graduation / Status:</span>
+          <strong id="doc-graduation-year" class="font-bold text-slate-900">--</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Mode of Study:</span>
+          <strong class="font-bold text-slate-900">Full-Time (Regular)</strong>
+        </div>
+        <div>
+          <span class="text-slate-500 block text-[9.5px] uppercase font-semibold">Medium of Instruction:</span>
+          <strong class="font-bold text-slate-900">English</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course Records Container (Semester by Semester) -->
+    <div id="doc-semester-tables-container" class="relative z-10 space-y-4">
+      <!-- Injected by transcripts.js -->
+    </div>
+
+    <!-- Overall Cumulative Summary & Classification -->
+    <div class="relative z-10 mt-4 border-2 border-slate-900 p-3 bg-slate-50 print-avoid-break">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center divide-x divide-slate-300">
+        <div>
+          <span class="text-[10px] text-slate-600 block uppercase font-bold">Total Credit Units Earned</span>
+          <strong id="doc-total-credits" class="text-base font-black text-slate-900">0</strong>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-600 block uppercase font-bold">Total Quality Points (TQP)</span>
+          <strong id="doc-total-qp" class="text-base font-black text-slate-900 font-mono">0.00</strong>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-600 block uppercase font-bold">Cumulative GPA (CGPA)</span>
+          <strong id="doc-final-cgpa" class="text-lg font-black text-slate-900 font-mono">0.00</strong>
+        </div>
+        <div>
+          <span class="text-[10px] text-slate-600 block uppercase font-bold">Class of Diploma Awarded</span>
+          <strong id="doc-classification" class="text-sm font-black text-blue-900 uppercase">--</strong>
+        </div>
+      </div>
+
+      <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-700">
+        <strong>Official Remarks:</strong> <span id="doc-remarks">--</span>
+      </div>
+    </div>
+
+    <!-- Official Grading Key Table -->
+    <div class="relative z-10 mt-4 border border-slate-300 p-2 text-[10px] print-avoid-break bg-white">
+      <div class="font-bold uppercase text-[9.5px] text-slate-700 mb-1">
+        Official NBTE / Kano State Polytechnic Grading Policy Scale Key:
+      </div>
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-slate-100 text-[9px] font-bold uppercase border-b border-slate-300">
+            <th class="py-0.5 px-1 text-center w-12">Grade</th>
+            <th class="py-0.5 px-1 text-center w-20">Score Range</th>
+            <th class="py-0.5 px-1 text-center w-20">Grade Point</th>
+            <th class="py-0.5 px-1">Description / Academic Standing</th>
+          </tr>
+        </thead>
+        <tbody id="doc-grading-scale-tbody">
+          <!-- Injected by transcripts.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Official Signatures & Seal Section -->
+    <div class="relative z-10 mt-6 pt-4 border-t-2 border-slate-800 print-avoid-break">
+      <div class="grid grid-cols-3 gap-6 items-end text-center">
+        <!-- Registrar Signature -->
+        <div class="flex flex-col items-center">
+          <img src="../assets/images/signature.svg" alt="Registrar Signature" class="h-10 mb-1">
+          <div class="w-40 border-b border-slate-700"></div>
+          <strong id="doc-registrar-name" class="text-[11px] font-bold text-slate-900 mt-1 block">Mukhtar Ibrahim Bello</strong>
+          <span class="text-[9.5px] text-slate-500 uppercase block">Registrar / Academic Secretary</span>
+        </div>
+
+        <!-- Official Embossed Polytechnic Seal -->
+        <div class="flex flex-col items-center justify-center">
+          <img src="../assets/images/seal.svg" alt="Seal" class="w-20 h-20 drop-shadow-sm">
+          <span class="text-[8.5px] font-seal font-bold text-amber-900 uppercase mt-0.5 block">Official Institutional Seal</span>
+        </div>
+
+        <!-- HOD Signature -->
+        <div class="flex flex-col items-center">
+          <img src="../assets/images/signature.svg" alt="HOD Signature" class="h-10 mb-1">
+          <div class="w-40 border-b border-slate-700"></div>
+          <strong id="doc-hod-name" class="text-[11px] font-bold text-slate-900 mt-1 block">Dr. Aminu Abdullahi</strong>
+          <span class="text-[9.5px] text-slate-500 uppercase block">Head of Department (Computer Science)</span>
+        </div>
+      </div>
+
+      <div class="mt-4 text-center text-[8.5px] text-slate-400">
+        This document is an authentic certified academic transcript of Kano State Polytechnic. Any erasure or alteration invalidates this record. Verification available via QR code or online portal.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/calculations.js"></script>
+  <script src="../assets/js/verification.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/transcripts.js"></script>
+</body>
+</html>

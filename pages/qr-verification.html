@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Verification Audit - Kano State Polytechnic Academic Transcript System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo-placeholder.svg">
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+  <div class="min-h-screen flex">
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/60 z-40 hidden md:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col transition-transform duration-300 -translate-x-full md:translate-x-0 border-r border-slate-800">
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+        <a href="dashboard.html" class="flex items-center space-x-3">
+          <img src="../assets/images/logo-placeholder.svg" alt="Crest" class="w-10 h-10 drop-shadow">
+          <div>
+            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">Kano State Poly</span>
+            <span class="text-xs font-semibold text-white">Computer Science Dept</span>
+          </div>
+        </a>
+        <button id="sidebar-close-btn" class="md:hidden text-slate-400 hover:text-white">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto text-xs font-medium">
+        <a href="dashboard.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Dashboard
+        </a>
+        <a href="students.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          Student Management
+        </a>
+        <a href="courses.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Course Management
+        </a>
+        <a href="academic-sessions.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Academic Sessions
+        </a>
+        <a href="semesters.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          Semester Management
+        </a>
+        <a href="results.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          Result Management
+        </a>
+        <a href="gpa-cgpa.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          GPA &amp; CGPA
+        </a>
+        <a href="transcripts.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Transcript Management
+        </a>
+        <a href="qr-verification.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+          QR Verification
+        </a>
+        <a href="settings.html" class="nav-link flex items-center px-3 py-2.5 rounded-xl transition text-slate-300 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Settings
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <button type="button" onclick="AppLayout.logout()" class="w-full flex items-center justify-center px-3 py-2 rounded-xl text-xs font-semibold bg-red-950/40 text-red-400 hover:bg-red-900/50 hover:text-red-200 border border-red-900/50 transition">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          End Staff Session
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Container -->
+    <div class="flex-1 md:pl-64 flex flex-col min-w-0">
+      
+      <!-- Topbar -->
+      <header id="topbar" class="bg-white border-b border-slate-200 sticky top-0 z-30 px-4 sm:px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <button id="sidebar-toggle-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div>
+            <h2 class="text-base font-bold text-slate-800">QR Code Verification Administration</h2>
+            <p class="text-xs text-slate-400">Generate references, inspect verification status, and audit external validation queries</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <a href="../verify.html" target="_blank" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs shadow-sm transition flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Public Verification Portal
+          </a>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6">
+
+        <!-- Staff QR Tool Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          <!-- Staff QR Generator Card -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">Transcript QR Generator &amp; Previewer</h3>
+              <p class="text-xs text-slate-400">Input any transcript reference or select from registered transcripts</p>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Select Issued Transcript</label>
+                <select id="staff-qr-transcript-select" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg font-mono">
+                  <!-- Populated by JS -->
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Or Enter Custom Reference Number</label>
+                <div class="flex gap-2">
+                  <input id="staff-qr-ref-input" type="text" placeholder="e.g. KSP/CST/TR/2024/00842" class="flex-1 px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg font-mono font-semibold uppercase">
+                  <button type="button" onclick="generateStaffQR()" class="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white font-bold rounded-lg transition">
+                    Render QR
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- QR Preview Canvas Container -->
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center gap-6">
+              <div id="staff-qr-display-box" class="w-36 h-36 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center p-2 shadow-inner">
+                <canvas id="staff-qr-canvas" class="max-w-full max-h-full"></canvas>
+              </div>
+              <div class="flex-1 text-xs space-y-2">
+                <div>
+                  <span class="text-slate-400 block">Encoded Verification Endpoint:</span>
+                  <span id="staff-qr-target-url" class="font-mono text-[11px] text-blue-900 break-all font-semibold">--</span>
+                </div>
+                <div class="pt-2">
+                  <button type="button" onclick="testStaffQRUrl()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg font-semibold transition">
+                    Launch in Verification Portal &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Verification Test Card -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-sm font-bold text-slate-900">Instant Verification Tester</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Live API</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-4">Validate transcript references directly inside this administrative session</p>
+
+              <div class="space-y-3 text-xs">
+                <div class="flex gap-2">
+                  <input id="staff-quick-verify-ref" type="text" placeholder="Enter Reference (e.g. KSP/CST/TR/2024/00842)" class="flex-1 px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg font-mono font-semibold uppercase">
+                  <button type="button" onclick="runStaffVerification()" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-lg shadow-sm transition">
+                    Verify
+                  </button>
+                </div>
+                <div id="staff-verify-result-box" class="hidden p-4 rounded-xl border text-xs">
+                  <!-- Injected by script -->
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500">
+              Note: Every verification executed is recorded into the audit trail for security compliance.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Verification Audit Trail Table Card -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">Transcript Verification Audit Logs</h3>
+              <p class="text-xs text-slate-400">Timestamped record of public and departmental QR scan inquiries</p>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="bg-slate-50 text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200">
+                  <th class="py-3 px-4">Verification Time</th>
+                  <th class="py-3 px-4">Reference Number</th>
+                  <th class="py-3 px-4">Student Name</th>
+                  <th class="py-3 px-4">Client User-Agent</th>
+                  <th class="py-3 px-4 text-center">Result Status</th>
+                </tr>
+              </thead>
+              <tbody id="verification-logs-tbody" class="divide-y divide-slate-100">
+                <!-- Injected via script -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+
+      <footer class="bg-white border-t border-slate-200 py-4 px-6 text-xs text-slate-500 text-center">
+        &copy; Kano State Polytechnic &bull; Department of Computer Science &bull; QR Verification Audit
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/verification.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadTranscriptsSelect();
+      await loadVerificationLogs();
+    });
+
+    async function loadTranscriptsSelect() {
+      const select = document.getElementById('staff-qr-transcript-select');
+      const input = document.getElementById('staff-qr-ref-input');
+      const transcripts = await api.transcripts.getAll();
+
+      select.innerHTML = `<option value="" disabled selected>Choose Issued Transcript...</option>` +
+        transcripts.map(t => `<option value="${t.referenceNumber}">${t.referenceNumber} - ${t.studentName} (${t.status})</option>`).join('');
+
+      select.addEventListener('change', (e) => {
+        input.value = e.target.value;
+        generateStaffQR();
+      });
+
+      if (transcripts.length > 0) {
+        select.value = transcripts[0].referenceNumber;
+        input.value = transcripts[0].referenceNumber;
+        generateStaffQR();
+      }
+    }
+
+    function generateStaffQR() {
+      const ref = document.getElementById('staff-qr-ref-input').value.trim();
+      const canvas = document.getElementById('staff-qr-canvas');
+      const urlDisplay = document.getElementById('staff-qr-target-url');
+      if (!ref) return;
+
+      const fullUrl = TranscriptVerificationService.getVerificationURL(ref);
+      TranscriptVerificationService.renderQR(canvas, ref, { size: 130 });
+      urlDisplay.textContent = fullUrl;
+    }
+
+    function testStaffQRUrl() {
+      const ref = document.getElementById('staff-qr-ref-input').value.trim();
+      if (!ref) return;
+      window.open(`../verify.html?ref=${encodeURIComponent(ref)}`, '_blank');
+    }
+
+    async function runStaffVerification() {
+      const ref = document.getElementById('staff-quick-verify-ref').value.trim();
+      const box = document.getElementById('staff-verify-result-box');
+      if (!ref) return;
+
+      box.classList.remove('hidden');
+      box.className = "p-4 rounded-xl border text-xs bg-slate-50 border-slate-200";
+      box.textContent = "Verifying...";
+
+      const res = await api.verification.verify(ref);
+      if (res.verified) {
+        box.className = "p-4 rounded-xl border text-xs bg-emerald-50 border-emerald-300 text-emerald-900";
+        box.innerHTML = `
+          <div class="font-bold text-sm text-emerald-800 flex items-center gap-1.5 mb-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            STATUS: VERIFIED &amp; VALID
+          </div>
+          <div><strong>Student:</strong> ${res.transcript.studentName} (${res.transcript.matricNumber})</div>
+          <div><strong>Reference:</strong> ${res.transcript.referenceNumber}</div>
+          <div><strong>Classification:</strong> ${res.transcript.classification}</div>
+        `;
+      } else {
+        box.className = "p-4 rounded-xl border text-xs bg-red-50 border-red-300 text-red-900";
+        box.innerHTML = `
+          <div class="font-bold text-sm text-red-800 flex items-center gap-1.5 mb-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            STATUS: ${res.status}
+          </div>
+          <p>${res.message}</p>
+        `;
+      }
+      loadVerificationLogs();
+    }
+
+    async function loadVerificationLogs() {
+      const tbody = document.getElementById('verification-logs-tbody');
+      if (!tbody) return;
+
+      const logs = await api.verification.getLogs();
+      if (logs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-400">No verification inquiries logged yet.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = logs.map(l => `
+        <tr class="hover:bg-slate-50 border-b border-slate-100">
+          <td class="py-3 px-4 font-mono text-xs text-slate-600">${l.verifiedAt}</td>
+          <td class="py-3 px-4 font-mono font-bold text-xs text-slate-900">${l.referenceNumber}</td>
+          <td class="py-3 px-4 font-medium text-slate-800">${l.studentName}</td>
+          <td class="py-3 px-4 text-xs text-slate-500 font-mono truncate max-w-xs">${l.userAgent}</td>
+          <td class="py-3 px-4 text-center">${UIHelpers.getStatusBadge(l.status)}</td>
+        </tr>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
