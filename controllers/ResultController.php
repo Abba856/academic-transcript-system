@@ -14,6 +14,9 @@ use Middleware\PermissionMiddleware;
 
 class ResultController {
     public function index(): void {
+        AuthMiddleware::authenticate();
+        PermissionMiddleware::check('results.view');
+
         $filters = [
             'studentId'   => $_GET['studentId'] ?? $_GET['student_id'] ?? null,
             'courseCode'  => $_GET['courseCode'] ?? $_GET['course_code'] ?? null,
@@ -28,6 +31,9 @@ class ResultController {
     }
 
     public function show(int $id): void {
+        AuthMiddleware::authenticate();
+        PermissionMiddleware::check('results.view');
+
         $res = Result::findById($id);
         if (!$res) {
             Response::notFound("Result record not found");

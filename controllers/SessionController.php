@@ -14,11 +14,15 @@ use Middleware\PermissionMiddleware;
 
 class SessionController {
     public function index(): void {
+        AuthMiddleware::authenticate();
+
         $sessions = AcademicSession::all();
         Response::success($sessions);
     }
 
     public function show(int $id): void {
+        AuthMiddleware::authenticate();
+
         $sess = AcademicSession::findById($id);
         if (!$sess) {
             Response::notFound("Session not found");

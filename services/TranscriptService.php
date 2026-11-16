@@ -33,8 +33,8 @@ class TranscriptService {
             throw new Exception("Student not found with ID {$studentId}");
         }
 
-        // Get student's approved results
-        $results = Result::getByStudent($studentId);
+        // Get student's approved results only; drafts must never appear on an official transcript
+        $results = Result::all(['studentId' => $studentId, 'status' => 'Approved']);
         if (empty($results)) {
             throw new Exception("Cannot generate transcript: No examination results recorded for this student.");
         }

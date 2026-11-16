@@ -15,6 +15,8 @@ use Middleware\PermissionMiddleware;
 
 class SettingController {
     public function index(): void {
+        AuthMiddleware::authenticate();
+
         $settings = Setting::getStructuredSettings();
         Response::success($settings);
     }

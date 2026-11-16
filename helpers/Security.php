@@ -98,7 +98,7 @@ class Security {
                 ]);
             }
         } catch (\Throwable $e) {
-            // Silently continue if attempt table is not ready
+            error_log('Could not record login attempt: ' . $e->getMessage());
         }
     }
 
@@ -110,20 +110,22 @@ class Security {
             $windowMinutes = (int)($cfg['lockout_duration_min'] ?? 15);
             $maxAttempts = (int)($cfg['max_login_attempts'] ?? 5);
 
+            // INTERVAL does not accept a bound placeholder on MySQL, so the
+            // already-cast integer is interpolated instead.
             $stmt = $db->prepare("
                 SELECT COUNT(*) FROM `login_attempts`
                 WHERE (`identifier` = :id OR `ip_address` = :ip)
-                  AND `attempted_at` > DATE_SUB(NOW(), INTERVAL :window MINUTE)
+                  AND `attempted_at` > DATE_SUB(NOW(), INTERVAL {$windowMinutes} MINUTE)
             ");
             $stmt->execute([
-                ':id'     => $identifier,
-                ':ip'     => $ip,
-                ':window' => $windowMinutes
+                ':id' => $identifier,
+                ':ip' => $ip
             ]);
 
             $fails = (int)$stmt->fetchColumn();
             return $fails >= $maxAttempts;
         } catch (\Throwable $e) {
+            error_log('Rate limit check failed: ' . $e->getMessage());
             return false;
         }
     }

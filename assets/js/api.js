@@ -389,7 +389,7 @@ const api = {
       }
 
       const session = {
-        token: "demo_jwt_token_" + Date.now(),
+        token: "mock_session_" + Date.now(),
         user: db.userProfile,
         expiresAt: Date.now() + (remember ? 30 * 86400000 : 86400000)
       };

@@ -14,11 +14,15 @@ use Middleware\PermissionMiddleware;
 
 class SemesterController {
     public function index(): void {
+        AuthMiddleware::authenticate();
+
         $semesters = Semester::all();
         Response::success($semesters);
     }
 
     public function show(int $id): void {
+        AuthMiddleware::authenticate();
+
         $sem = Semester::findById($id);
         if (!$sem) {
             Response::notFound("Semester not found");

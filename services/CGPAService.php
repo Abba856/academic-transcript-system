@@ -17,7 +17,8 @@ class CGPAService {
      * @return array
      */
     public static function calculateForStudent(int $studentId): array {
-        $results = Result::getByStudent($studentId);
+        // Only approved results contribute to published GPA/CGPA figures.
+        $results = Result::all(['studentId' => $studentId, 'status' => 'Approved']);
 
         // Group by semester
         $semesters = [];

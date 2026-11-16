@@ -128,12 +128,11 @@ academic-transcript-system/
 │   ├── transcripts/                   # Generated A4 PDF Documents
 │   └── uploads/                       # Student Avatars and Files
 ├── tests/
-│   ├── BackendTest.php                # Comprehensive 43-Assertion Backend Test Suite
-│   └── HttpEndpointTest.php           # 14-Assertion HTTP REST Dispatcher Test Suite
+│   ├── BackendTest.php                # Comprehensive 46-Assertion Backend Test Suite
+│   └── HttpEndpointTest.php           # 17-Assertion HTTP REST Dispatcher Test Suite
 ├── bootstrap.php                      # Autoloader & Exception Handler
 ├── composer.json                      # Dependency Manifest & PSR-4 Definition
 ├── index.html                         # System Splash / Portal Landing Page
-├── index.php                          # Root Redirect to Dashboard / Login
 ├── login.html                         # Staff Authentication Page
 ├── verify.html                        # Public QR / Reference Verification Portal
 └── README.md                          # Documentation
@@ -210,7 +209,7 @@ All calculations are enforced strictly on the PHP backend; client-side scores ar
      $$\text{Token} = \text{bin2hex}(\text{random\_bytes}(32))$$
    - The token's SHA-256 hash is recorded in `transcript_verifications`.
    - The transcript reference format: `KSP/CST/TR/{YEAR}/{SERIAL}` (e.g., `KSP/CST/TR/2025/0001`).
-   - A vector SVG QR code is compiled, pointing to `http://<domain>/verify.html?token=<token>`.
+   - A standards-compliant QR code (ISO/IEC 18004, byte mode, error correction level M) is encoded natively and rendered as vector SVG, pointing to `http://<domain>/verify.html?token=<token>`.
 2. **Verification (`verify.html` / `GET /api/verification/verify.php`):**
    - The portal accepts the QR token OR the transcript reference number.
    - The SHA-256 hash of the input is queried against `transcript_verifications`.
@@ -272,12 +271,12 @@ All accounts are pre-seeded with password: `admin123`
 
 The application includes two automated test suites:
 
-### Run Backend Unit Tests (43 Assertions)
+### Run Backend Unit Tests (46 Assertions)
 ```bash
 php tests/BackendTest.php
 ```
 
-### Run HTTP REST API Dispatcher Tests (14 Assertions)
+### Run HTTP REST API Dispatcher Tests (17 Assertions)
 ```bash
 php tests/HttpEndpointTest.php
 ```

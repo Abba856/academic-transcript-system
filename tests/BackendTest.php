@@ -197,6 +197,35 @@ class BackendTestSuite {
         $path = QRCodeService::generate($url, "test_qr_code");
         $fullPath = dirname(__DIR__) . '/' . $path;
         $this->assert("QR Code SVG Generated", file_exists($fullPath) && filesize($fullPath) > 100);
+
+        $matrix = QRCodeService::matrix($url);
+        $modules = count($matrix);
+        $this->assert(
+            "QR Matrix Has Valid Dimension",
+            $modules >= 21 && ($modules - 21) % 4 === 0
+        );
+
+        $finderOk = true;
+        foreach ([[0, 0], [0, $modules - 7], [$modules - 7, 0]] as [$startRow, $startCol]) {
+            for ($r = 0; $r < 7; $r++) {
+                for ($c = 0; $c < 7; $c++) {
+                    $expected = $r === 0 || $r === 6 || $c === 0 || $c === 6
+                        || ($r >= 2 && $r <= 4 && $c >= 2 && $c <= 4);
+                    if ($matrix[$startRow + $r][$startCol + $c] !== $expected) {
+                        $finderOk = false;
+                    }
+                }
+            }
+        }
+        $this->assert("QR Finder Patterns Valid", $finderOk);
+
+        $rejected = false;
+        try {
+            QRCodeService::matrix(str_repeat('x', 300));
+        } catch (\InvalidArgumentException $e) {
+            $rejected = true;
+        }
+        $this->assert("Oversized QR Payload Rejected", $rejected);
     }
 
     private function testPDFGeneration(): void {

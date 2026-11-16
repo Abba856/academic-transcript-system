@@ -16,6 +16,8 @@ use Exception;
 
 class TranscriptController {
     public function index(): void {
+        AuthMiddleware::authenticate();
+
         $filters = [
             'search'     => $_GET['search'] ?? null,
             'status'     => $_GET['status'] ?? null,
@@ -27,6 +29,8 @@ class TranscriptController {
     }
 
     public function show(int|string $id): void {
+        AuthMiddleware::authenticate();
+
         $transcript = Transcript::findById($id);
         if (!$transcript) {
             Response::notFound("Transcript record not found with ID/Reference '{$id}'");

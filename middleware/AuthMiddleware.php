@@ -21,16 +21,12 @@ class AuthMiddleware {
             Response::unauthorized('Authentication token is missing. Please log in.');
         }
 
-        // Check if token is standard JWT
+        // Only signed JWT tokens are accepted
         $payload = Security::verifyToken($token);
 
-        // Fallback: If token was a demo token or simple ID token
         $userId = null;
         if ($payload && isset($payload['user_id'])) {
             $userId = (int)$payload['user_id'];
-        } elseif (preg_match('/^demo_jwt_token_(\d+)/', $token)) {
-            // Default demo admin account
-            $userId = 1;
         }
 
         if (!$userId) {
@@ -75,7 +71,7 @@ class AuthMiddleware {
         if (!$token) return null;
 
         $payload = Security::verifyToken($token);
-        $userId = $payload['user_id'] ?? (preg_match('/^demo_jwt_token_(\d+)/', $token) ? 1 : null);
+        $userId = $payload['user_id'] ?? null;
         if (!$userId) return null;
 
         try {

@@ -17,6 +17,9 @@ use Middleware\PermissionMiddleware;
 
 class StudentController {
     public function index(): void {
+        AuthMiddleware::authenticate();
+        PermissionMiddleware::check('students.view');
+
         $filters = [
             'search'    => $_GET['search'] ?? null,
             'level'     => $_GET['level'] ?? null,
@@ -30,6 +33,9 @@ class StudentController {
     }
 
     public function show(int|string $id): void {
+        AuthMiddleware::authenticate();
+        PermissionMiddleware::check('students.view');
+
         $student = Student::findById($id);
         if (!$student) {
             Response::notFound("Student record not found with ID/Matric '{$id}'");

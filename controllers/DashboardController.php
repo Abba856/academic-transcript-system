@@ -7,6 +7,7 @@ namespace Controllers;
 
 use Helpers\Response;
 use Helpers\Database;
+use Middleware\AuthMiddleware;
 use Models\Student;
 use Models\Transcript;
 use Models\AcademicSession;
@@ -15,6 +16,8 @@ use PDO;
 
 class DashboardController {
     public function stats(): void {
+        AuthMiddleware::authenticate();
+
         $db = Database::getInstance();
 
         // Summary counts

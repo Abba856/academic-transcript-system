@@ -14,6 +14,9 @@ use Middleware\PermissionMiddleware;
 
 class CourseController {
     public function index(): void {
+        AuthMiddleware::authenticate();
+        PermissionMiddleware::check('courses.view');
+
         $filters = [
             'search'   => $_GET['search'] ?? null,
             'level'    => $_GET['level'] ?? null,
@@ -26,6 +29,9 @@ class CourseController {
     }
 
     public function show(int|string $id): void {
+        AuthMiddleware::authenticate();
+        PermissionMiddleware::check('courses.view');
+
         $course = Course::findById($id);
         if (!$course) {
             Response::notFound("Course not found with ID/Code '{$id}'");

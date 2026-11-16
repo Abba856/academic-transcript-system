@@ -9,6 +9,7 @@ namespace Controllers;
 use Helpers\Response;
 use Models\Verification;
 use Middleware\AuthMiddleware;
+use Middleware\PermissionMiddleware;
 
 class VerificationController {
     public function verify(): void {
@@ -30,7 +31,12 @@ class VerificationController {
     }
 
     public function logs(): void {
+        AuthMiddleware::authenticate();
+        PermissionMiddleware::check('verification.view');
+
         $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 50;
+        $limit = max(1, min($limit, 200));
+
         $logs = Verification::getLogs($limit);
         Response::success($logs);
     }

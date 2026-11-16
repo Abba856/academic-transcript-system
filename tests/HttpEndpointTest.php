@@ -27,52 +27,62 @@ class HttpEndpointTest {
         $failRes = $this->runEndpoint("auth/login.php", "POST", [], ['emailOrUsername' => 'admin', 'password' => 'wrongpass']);
         $this->assert("POST /api/auth/login.php (Invalid credentials rejected)", $failRes['success'] === false);
 
+        // 2b. Protected endpoints reject anonymous and unsigned demo tokens
+        $anonRes = $this->runEndpoint("students/index.php", "GET");
+        $this->assert("GET /api/students/index.php (Anonymous rejected)", $anonRes['success'] === false);
+
+        $demoRes = $this->runEndpoint("students/index.php", "GET", [], null, 'demo_jwt_token_1');
+        $this->assert("GET /api/students/index.php (Unsigned demo token rejected)", $demoRes['success'] === false);
+
         // 3. Students Index
-        $studentsRes = $this->runEndpoint("students/index.php", "GET", ['level' => 'ND II']);
+        $studentsRes = $this->runEndpoint("students/index.php", "GET", ['level' => 'ND II'], null, $token);
         $this->assert("GET /api/students/index.php (Filtered by level)", $studentsRes['success'] === true && is_array($studentsRes['data']) && count($studentsRes['data']) >= 1);
 
         // 4. Students Show
-        $studentShow = $this->runEndpoint("students/show.php", "GET", ['id' => 1]);
+        $studentShow = $this->runEndpoint("students/show.php", "GET", ['id' => 1], null, $token);
         $this->assert("GET /api/students/show.php?id=1", $studentShow['success'] === true && $studentShow['data']['matric_number'] === 'KSP/CS/2023/001');
 
         // 5. Courses Index
-        $coursesRes = $this->runEndpoint("courses/index.php", "GET");
+        $coursesRes = $this->runEndpoint("courses/index.php", "GET", [], null, $token);
         $this->assert("GET /api/courses/index.php", $coursesRes['success'] === true && is_array($coursesRes['data']) && count($coursesRes['data']) >= 18);
 
         // 6. Sessions Index
-        $sessRes = $this->runEndpoint("sessions/index.php", "GET");
+        $sessRes = $this->runEndpoint("sessions/index.php", "GET", [], null, $token);
         $this->assert("GET /api/sessions/index.php", $sessRes['success'] === true && count($sessRes['data']) >= 4);
 
         // 7. Semesters Index
-        $semRes = $this->runEndpoint("semesters/index.php", "GET");
+        $semRes = $this->runEndpoint("semesters/index.php", "GET", [], null, $token);
         $this->assert("GET /api/semesters/index.php", $semRes['success'] === true && count($semRes['data']) >= 6);
 
         // 8. Results Index
-        $resultsRes = $this->runEndpoint("results/index.php", "GET", ['studentId' => 1]);
+        $resultsRes = $this->runEndpoint("results/index.php", "GET", ['studentId' => 1], null, $token);
         $this->assert("GET /api/results/index.php?studentId=1", $resultsRes['success'] === true && count($resultsRes['data']) >= 10);
 
         // 9. Transcripts Index
-        $trRes = $this->runEndpoint("transcripts/index.php", "GET");
+        $trRes = $this->runEndpoint("transcripts/index.php", "GET", [], null, $token);
         $this->assert("GET /api/transcripts/index.php", $trRes['success'] === true && count($trRes['data']) >= 1);
 
         // 10. Verification Endpoint (Public)
         $verRes = $this->runEndpoint("verification/verify.php", "GET", ['ref' => 'KSP/CST/TR/2025/0001']);
         $this->assert("GET /api/verification/verify.php (Authentic Ref)", $verRes['success'] === true && $verRes['data']['verified'] === true);
 
-        // 11. Verification Logs
-        $logsRes = $this->runEndpoint("verification/logs.php", "GET");
+        // 11. Verification Logs (authenticated staff only)
+        $anonLogs = $this->runEndpoint("verification/logs.php", "GET");
+        $this->assert("GET /api/verification/logs.php (Anonymous rejected)", $anonLogs['success'] === false);
+
+        $logsRes = $this->runEndpoint("verification/logs.php", "GET", [], null, $token);
         $this->assert("GET /api/verification/logs.php", $logsRes['success'] === true && is_array($logsRes['data']));
 
         // 12. Dashboard Stats
-        $dashRes = $this->runEndpoint("dashboard/stats.php", "GET");
+        $dashRes = $this->runEndpoint("dashboard/stats.php", "GET", [], null, $token);
         $this->assert("GET /api/dashboard/stats.php", $dashRes['success'] === true && isset($dashRes['data']['cards']['totalStudents']));
 
         // 13. Settings Index
-        $settRes = $this->runEndpoint("settings/index.php", "GET");
+        $settRes = $this->runEndpoint("settings/index.php", "GET", [], null, $token);
         $this->assert("GET /api/settings/index.php", $settRes['success'] === true && isset($settRes['data']['institution']));
 
         // 14. Master REST Router
-        $routerRes = $this->runEndpoint("index.php", "GET", ['route' => 'courses']);
+        $routerRes = $this->runEndpoint("index.php", "GET", ['route' => 'courses'], null, $token);
         $this->assert("Master Router /api/index.php?route=courses", $routerRes['success'] === true && count($routerRes['data']) >= 18);
 
         echo "\n--------------------------------------------------------------------\n";

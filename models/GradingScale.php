@@ -34,6 +34,10 @@ class GradingScale {
     }
 
     public static function getGradeForScore(float $score): array {
+        // Normalise to the 2-decimal precision used by the grading bands so that
+        // fractional totals cannot fall through every band and be graded F.
+        $score = round($score, 2);
+
         $scale = self::all();
         foreach ($scale as $item) {
             if ($score >= $item['min_score'] && $score <= $item['max_score']) {
