@@ -4,6 +4,44 @@
  * Kano State Polytechnic - Academic Transcript Generating System
  */
 
+function loadEnvironment(): void {
+    $envFile = __DIR__ . '/.env';
+    if (!is_file($envFile)) {
+        return;
+    }
+
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if ($lines === false) {
+        return;
+    }
+
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#') || str_starts_with($line, ';')) {
+            continue;
+        }
+
+        if (str_contains($line, '=')) {
+            [$key, $value] = array_map('trim', explode('=', $line, 2));
+            $key = trim($key);
+            $value = trim($value);
+
+            if ($value !== '' && (($value[0] === '"' && substr($value, -1) === '"') || ($value[0] === "'" && substr($value, -1) === "'"))) {
+                $value = substr($value, 1, -1);
+            }
+
+            if (!array_key_exists($key, $_ENV) && !array_key_exists($key, $_SERVER) && getenv($key) === false) {
+                putenv("{$key}={$value}");
+            }
+
+            $_ENV[$key] = $value;
+            $_SERVER[$key] = $value;
+        }
+    }
+}
+
+loadEnvironment();
+
 // Global Error Reporting
 error_reporting(E_ALL);
 ini_set('display_errors', '0');

@@ -63,7 +63,7 @@ class Setting {
                 'contactEmail' => 'info@kanopoly.edu.ng',
                 'contactPhone' => '+234 803 123 4567',
                 'website'      => 'www.kanopoly.edu.ng',
-                'logo'         => $all['institution_logo'] ?? 'assets/images/logo-placeholder.svg',
+                'logo'         => $all['institution_logo'] ?? 'assets/images/logo.png',
                 'seal'         => $all['institution_seal'] ?? 'assets/images/seal.svg',
             ],
             'gradingScale' => $grading,

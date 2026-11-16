@@ -155,6 +155,13 @@ body {
   border: 1px solid #fde68a;
 }
 
+/* Logo Styles */
+img[src*="logo.png"] {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 0.125rem;
+}
+
 /* ==========================================================================
    PRINT STYLES FOR A4 TRANSCRIPT & VERIFICATION
    ========================================================================== */
