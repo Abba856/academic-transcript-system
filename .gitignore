@@ -1,0 +1,13 @@
+.env
+vendor/
+node_modules/
+*.log
+.DS_Store
+storage/logs/
+storage/temporary/
+storage/transcripts/
+storage/uploads/
+storage/qrcodes/
+coverage/
+.idea/
+.vscode/
